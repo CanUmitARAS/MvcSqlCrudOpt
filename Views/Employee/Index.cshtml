@@ -1,0 +1,39 @@
+﻿@*
+    For more information on enabling MVC for empty projects, visit https://go.microsoft.com/fwlink/?LinkID=397860
+*@         
+}
+@model List<MvcSqlCrudOpt.Models.Domain.Employee>
+<h1>Employee list</h1>
+<table class="table">
+    <thead>
+        <tr>
+            <th scope="col">Id</th>
+            <th scope="col">Name</th>
+            <th scope="col">Email</th>
+            <th scope="col">Salary</th>
+            <th scope="col">Date Of Birth</th>
+            <th scope="col">Department</th>
+            <th scope="col">Edit</th>
+        </tr>
+    </thead>
+    <tbody>
+        @foreach (var employee in Model)
+        {
+        <tr>
+                <th>@employee.Id</th>
+                <th>@employee.Name</th>
+                <th>@employee.Email</th>
+                <th>@employee.Salary</th>
+                <th>@employee.DateOfBirth</th>
+                <th>@employee.Department</th>
+                <th><a href="Employee/View/@employee.Id">View</a></th>
+            
+        </tr>
+            
+
+        }
+
+        
+       
+    </tbody>
+</table>
