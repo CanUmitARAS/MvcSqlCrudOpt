@@ -74,7 +74,7 @@ namespace MvcSqlCrudOpt.Controllers
 
         }
 
-        [HttpPost]
+        [HttpPost] // edit çalışmıyor
         public async Task<IActionResult> View(UpdateEmployeeViewModel model)
         {
             var employee = await mvcDemoDbContext.Employees.FindAsync(model.Id);
