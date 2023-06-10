@@ -6,9 +6,9 @@ using MvcSqlCrudOpt.Models.Domain;
 
 namespace MvcSqlCrudOpt.Controllers
 {
-    
-  
-    public class EmployeeController: Controller
+
+
+    public class EmployeeController : Controller
     {
         private readonly MvcDemoDbContext mvcDemoDbContext;
 
@@ -68,13 +68,13 @@ namespace MvcSqlCrudOpt.Controllers
                     DateOfBirth = employee.DateOfBirth,
 
                 };
-                return await Task.Run(() =>  View("View", viewModel));
+                return await Task.Run(() => View("View", viewModel));
             }
             return RedirectToAction("Index");
 
         }
 
-        [HttpPost] // edit çalışmıyor
+        [HttpPost] 
         public async Task<IActionResult> View(UpdateEmployeeViewModel model)
         {
             var employee = await mvcDemoDbContext.Employees.FindAsync(model.Id);
@@ -85,6 +85,7 @@ namespace MvcSqlCrudOpt.Controllers
                 employee.Email = model.Email;
                 employee.Salary = model.Salary;
                 employee.Department = model.Department;
+                employee.DateOfBirth = model.DateOfBirth;
 
                 await mvcDemoDbContext.SaveChangesAsync();
 
@@ -94,5 +95,21 @@ namespace MvcSqlCrudOpt.Controllers
 
             return RedirectToAction("Index");
         }
+        [HttpPost]
+        public async Task<IActionResult> Delete(UpdateEmployeeViewModel model)
+        {
+            var employee = await mvcDemoDbContext.Employees.FindAsync(model.Id);
+
+            if (employee != null)
+            {
+                mvcDemoDbContext.Employees.Remove(employee);
+                await mvcDemoDbContext.SaveChangesAsync();
+
+                return RedirectToAction("Index");
+            }
+
+
+            return RedirectToAction("Index");
+        } 
     }
 }
